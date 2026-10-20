@@ -12,39 +12,26 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
     <style>
-        /* === VARIABEL WARNA & DESAIN === */
+        /* === VARIABEL WARNA & DESAIN (DISAMAKAN DENGAN INDEX 2) === */
         :root {
-            /* Background utama halaman tetap terang agar tombol gelap terlihat menonjol */
-            --bg-gradient: linear-gradient(135deg, #e8f0fe 0%, #ffffff 50%, #e6f4ea 100%);
-            
-            --text-main: #202124;
-            --navy-accent: #1a237e;
-            
-            /* Palet Warna Tombol (Agak Gelap dan Menarik) */
-            --dark-blue-1: #1e3a8a; /* Dokumen */
-            --dark-blue-2: #312e81;
-            --dark-blue-3: #1e40af;
-            --dark-blue-4: #3730a3;
-            --dark-blue-5: #283593;
+            /* Background Utama (Solid Denim Blue) */
+            --bg-main: #4A7298;        
+            --card-bg: #1E3A5F;        /* Solid Navy Blue */
+            --card-hover-bg: #23436b;  /* Hover Navy Blue */
+            --white: #FFFFFF;
 
-            --dark-green-1: #064e3b; /* Spreadsheet */
-            --dark-green-2: #065f46;
-            --dark-green-3: #0f766e;
-            --dark-green-4: #115e59;
-            --dark-green-5: #004d40;
-
-            --dark-purple-1: #4c1d95; /* Presentasi */
-            --dark-purple-2: #5b21b6;
-            --dark-purple-3: #6b21a8;
-
-            --dark-slate-1: #0f172a; /* Integrasi */
-            --dark-slate-2: #164e63;
+            --text-main: #FFFFFF;
+            --title-sub: #E5E7EB;
+            --navy-accent: #FFFFFF;
             
-            --dark-navy: #09090b; /* Sumatif */
+            /* Border & Highlights */
+            --border-default: 3px solid #88D4AB;  /* Highlight Hijau Mint */
+            --border-hover: 3px solid #A3E4C2;    /* Highlight Hijau Mint Cerah */
+            --icon-color: #88D4AB;                /* Warna Ikon Hijau Mint */
             
-            --border-radius: 20px;
-            --shadow-soft: 0 8px 24px rgba(0, 0, 0, 0.15);
-            --shadow-hover: 0 15px 35px rgba(0, 0, 0, 0.25);
+            --border-radius: 24px;
+            --shadow-soft: 0 6px 15px rgba(0, 0, 0, 0.2);
+            --shadow-hover: 0 15px 30px rgba(0, 0, 0, 0.4);
         }
 
         /* === RESET & BASE === */
@@ -56,13 +43,14 @@
         }
 
         body {
-            background: var(--bg-gradient);
+            background-color: var(--bg-main);
             color: var(--text-main);
             min-height: 100vh;
             position: relative;
             overflow-x: hidden;
             display: flex;
             justify-content: center;
+            padding-bottom: 24px;
         }
 
         /* === FLOATING BACKGROUND DECORATION === */
@@ -71,12 +59,12 @@
             top: 0; left: 0; width: 100%; height: 100%;
             pointer-events: none;
             z-index: 0;
-            opacity: 0.12; 
+            opacity: 0.15; 
         }
 
         .bg-icon {
             position: absolute;
-            color: var(--navy-accent);
+            color: #FFFFFF;
             animation: floatAnim 8s ease-in-out infinite alternate;
         }
 
@@ -100,10 +88,11 @@
             z-index: 1;
             width: 100%;
             max-width: 900px;
-            padding: 50px 20px 80px 20px;
+            padding: 40px 20px 20px 20px;
             display: flex;
             flex-direction: column;
-            gap: 25px;
+            justify-content: space-between;
+            min-height: 100vh;
         }
 
         /* === HEADER / JUDUL === */
@@ -111,22 +100,39 @@
             text-align: center;
             opacity: 0;
             animation: fadeInUp 0.6s ease forwards;
-            margin-bottom: 10px;
+            margin-bottom: 24px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        /* Logo Atas Tengah (Ukuran Proporsional & Profesional) */
+        .header-logo {
+            width: 75px;
+            height: auto;
+            margin-bottom: 12px;
+            filter: drop-shadow(0 4px 6px rgba(0, 0, 0, 0.25));
+            transition: transform 0.3s ease;
+        }
+        .header-logo:hover {
+            transform: scale(1.08);
         }
 
         header h1 {
-            font-size: 1.4rem;
-            color: var(--navy-accent);
-            font-weight: 800;
-            letter-spacing: 1.5px;
-            margin-bottom: 8px;
+            font-size: 1.1rem;
+            color: var(--title-sub);
+            font-weight: 700;
+            letter-spacing: 1.2px;
+            margin-bottom: 4px;
+            text-transform: uppercase;
         }
 
         header h2 {
-            font-size: 2.4rem;
-            font-weight: 700;
+            font-size: 2.2rem;
+            font-weight: 800;
             color: var(--text-main);
-            line-height: 1.3;
+            line-height: 1.25;
+            text-shadow: 0 2px 8px rgba(0, 0, 0, 0.25);
         }
 
         /* === BUTTON CONTAINER === */
@@ -137,112 +143,97 @@
             width: 100%;
         }
 
-        /* === DESAIN TOMBOL === */
+        /* === DESAIN TOMBOL (BENTO CARD STYLE) === */
         .course-btn {
             display: flex;
             align-items: center;
             justify-content: space-between;
             width: 100%;
-            padding: 22px 26px;
+            padding: 20px 24px;
             border-radius: var(--border-radius);
             text-decoration: none;
-            
-            /* Teks Tombol Menjadi Putih */
             color: #ffffff; 
-            
-            border: 1px solid rgba(255, 255, 255, 0.1);
+            background-color: var(--card-bg);
+            border: var(--border-default);
             box-shadow: var(--shadow-soft);
-            transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
-            
+            transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
             opacity: 0;
             animation: fadeInUp 0.5s ease forwards;
-            animation-delay: calc(0.3s + (var(--i) * 0.08s));
+            animation-delay: calc(0.2s + (var(--i) * 0.04s));
         }
 
-        /* Efek Hover (Bergerak jika disentuh/dilewati mouse) */
+        /* Efek Hover */
         .course-btn:hover {
-            transform: translateY(-8px) scale(1.02); /* Naik ke atas dan membesar sedikit */
+            transform: scale(1.02) translateY(-4px);
+            background-color: var(--card-hover-bg);
+            border: var(--border-hover);
             box-shadow: var(--shadow-hover);
-            filter: brightness(1.15); /* Menjadi sedikit lebih cerah saat disentuh */
         }
 
         .course-btn:hover .btn-icon-left i {
-            transform: scale(1.2) rotate(10deg);
+            transform: scale(1.15) rotate(5deg);
         }
 
         /* Efek Klik */
         .course-btn:active {
-            transform: scale(0.96) translateY(0);
-            box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+            transform: scale(0.96);
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.5);
         }
 
         /* Struktur Dalam Tombol */
         .btn-icon-left {
             flex-shrink: 0;
-            width: 52px;
-            height: 52px;
+            width: 48px;
+            height: 48px;
             display: flex;
             align-items: center;
             justify-content: center;
-            /* Latar ikon agak transparan putih agar cocok dengan tema gelap */
-            background: rgba(255, 255, 255, 0.15); 
+            background: transparent; 
             border-radius: 14px;
-            font-size: 1.5rem;
-            color: #ffffff;
+            font-size: 1.6rem;
+            color: var(--icon-color) !important;
             transition: transform 0.3s ease;
         }
 
         .btn-text {
             flex-grow: 1;
-            margin: 0 20px;
-            font-size: 16px;
+            margin: 0 18px;
+            font-size: 15px;
             font-weight: 600;
             line-height: 1.55;
-            text-align: justify; /* Teks wajib rata kiri kanan */
+            text-align: justify;
+            text-justify: inter-word;
+            word-wrap: break-word;
+            overflow-wrap: break-word;
+            hyphens: auto;
         }
 
         .btn-decor-right {
             flex-shrink: 0;
-            font-size: 1.2rem;
-            color: rgba(255, 255, 255, 0.4); /* Warna dekorasi kanan */
+            font-size: 1.1rem;
+            color: var(--icon-color);
+            opacity: 0.8;
             display: flex;
             gap: 10px;
             align-items: center;
         }
 
-        /* === WARNA KELOMPOK MATERI (TEMA GELAP) === */
-        
-        /* Kelompok Dokumen */
-        .bg-doc-1 { background-color: var(--dark-blue-1); }
-        .bg-doc-2 { background-color: var(--dark-blue-2); }
-        .bg-doc-3 { background-color: var(--dark-blue-3); }
-        .bg-doc-4 { background-color: var(--dark-blue-4); }
-        .bg-doc-5 { background-color: var(--dark-blue-5); }
-        
-        /* Kelompok Spreadsheet */
-        .bg-sheet-1 { background-color: var(--dark-green-1); }
-        .bg-sheet-2 { background-color: var(--dark-green-2); }
-        .bg-sheet-3 { background-color: var(--dark-green-3); }
-        .bg-sheet-4 { background-color: var(--dark-green-4); }
-        .bg-sheet-5 { background-color: var(--dark-green-5); }
-
-        /* Kelompok Presentasi */
-        .bg-pres-1 { background-color: var(--dark-purple-1); }
-        .bg-pres-2 { background-color: var(--dark-purple-2); }
-        .bg-pres-3 { background-color: var(--dark-purple-3); }
-
-        /* Integrasi */
-        .bg-int-1 { background-color: var(--dark-slate-1); }
-        .bg-int-2 { background-color: var(--dark-slate-2); } 
-
-        /* Games */
-        .bg-games { 
-            background: linear-gradient(135deg, #be185d, #9d174d); /* Pink/Fuchsia Gelap yang menyenangkan */
+        /* FOOTER STYLING */
+        .page-footer {
+            width: 100%;
+            text-align: center;
+            padding-top: 20px;
+            padding-bottom: 10px;
+            border-top: 1px solid rgba(136, 212, 171, 0.3);
+            margin-top: 32px;
         }
 
-        /* Sumatif */
-        .bg-sumatif { background-color: var(--dark-navy); }
-        .bg-sumatif .btn-icon-left { color: #4ade80; } /* Aksen hijau cerah untuk ikon Sumatif */
+        .page-footer p {
+            font-size: 0.85rem;
+            font-weight: 700;
+            color: rgba(255, 255, 255, 0.85);
+            letter-spacing: 0.8px;
+        }
 
         /* === KEYFRAMES ANIMASI MASUK === */
         @keyframes fadeInUp {
@@ -252,27 +243,51 @@
 
         /* === RESPONSIVE DESIGN === */
         @media (max-width: 768px) {
-            header h2 { font-size: 1.8rem; }
+            .header-logo { width: 65px; }
+            header h1 { font-size: 0.95rem; }
+            header h2 { font-size: 1.6rem; }
             
             .course-btn {
-                padding: 18px 16px;
-                border-radius: 16px;
+                padding: 16px 18px;
+                border-radius: 18px;
             }
 
             .btn-text {
-                font-size: 14px;
+                font-size: 13.5px;
                 margin: 0 12px;
             }
 
             .btn-icon-left {
-                width: 44px; height: 44px; font-size: 1.2rem;
+                width: 42px; height: 42px; font-size: 1.3rem;
             }
             
             .btn-decor-right {
-                font-size: 1rem;
-                flex-direction: column;
-                gap: 5px;
+                font-size: 0.95rem;
+                gap: 6px;
             }
+
+            .page-footer p { font-size: 0.78rem; }
+        }
+
+        @media (max-width: 480px) {
+            .header-logo { width: 55px; }
+            header h2 { font-size: 1.35rem; }
+
+            .course-btn {
+                padding: 14px 15px;
+                border-radius: 16px;
+            }
+
+            .btn-text {
+                font-size: 13px;
+                margin: 0 10px;
+            }
+
+            .btn-icon-left {
+                width: 36px; height: 36px; font-size: 1.15rem;
+            }
+
+            .page-footer p { font-size: 0.72rem; }
         }
     </style>
 </head>
@@ -292,124 +307,134 @@
 
     <div class="container">
 
-        <!-- Header (Teks kembali & subjudul sudah dihapus) -->
-        <header>
-            <h1>KELAS VII – BAB IV</h1>
-            <h2>BAB 4: APLIKASI PERKANTORAN</h2>
-        </header>
+        <div>
+            <!-- Header -->
+            <header>
+                <!-- Logo Paling Atas Tengah -->
+                <img src="https://cdn.phototourl.com/member/2026-10-20-301bf8f0-f5cd-4de0-a3fd-b9b3a2d0e3e0.png" alt="Logo Informatika Fun" class="header-logo">
+                <h1>KELAS VII – BAB IV</h1>
+                <h2>BAB 4: APLIKASI PERKANTORAN</h2>
+            </header>
 
-        <!-- Kumpulan Tombol -->
-        <main class="button-group">
-            
-            <!-- DOKUMEN -->
-            <a href="https://riski902-alt.github.io/DASHBOARD-MATERI/index.html?id=kelas7-sem2-bab4-pertemuan1" class="course-btn bg-doc-1" style="--i: 1;">
-                <div class="btn-icon-left"><i class="fa-solid fa-file-word"></i></div>
-                <div class="btn-text">Pertemuan 1: Pengenalan Aplikasi Pengolah Dokumen, Antarmuka, dan Pemformatan Teks Dasar</div>
-                <div class="btn-decor-right"><i class="fa-solid fa-font"></i><i class="fa-solid fa-i-cursor"></i></div>
-            </a>
+            <!-- Kumpulan Tombol -->
+            <main class="button-group">
+                
+                <!-- DOKUMEN -->
+                <a href="https://riski902-alt.github.io/DASHBOARD-MATERI/index.html?id=kelas7-sem2-bab4-pertemuan1" class="course-btn" style="--i: 1;">
+                    <div class="btn-icon-left"><i class="fa-solid fa-file-word"></i></div>
+                    <div class="btn-text">Pertemuan 1: Pengenalan Aplikasi Pengolah Dokumen, Antarmuka, dan Pemformatan Teks Dasar</div>
+                    <div class="btn-decor-right"><i class="fa-solid fa-font"></i><i class="fa-solid fa-i-cursor"></i></div>
+                </a>
 
-            <a href="https://riski902-alt.github.io/DASHBOARD-MATERI/index.html?id=kelas7-sem2-bab4-pertemuan2" class="course-btn bg-doc-2" style="--i: 2;">
-                <div class="btn-icon-left"><i class="fa-solid fa-align-left"></i></div>
-                <div class="btn-text">Pertemuan 2: Pemformatan Paragraf, Tata Letak Halaman</div>
-                <div class="btn-decor-right"><i class="fa-solid fa-ruler-horizontal"></i><i class="fa-regular fa-file-lines"></i></div>
-            </a>
+                <a href="https://riski902-alt.github.io/DASHBOARD-MATERI/index.html?id=kelas7-sem2-bab4-pertemuan2" class="course-btn" style="--i: 2;">
+                    <div class="btn-icon-left"><i class="fa-solid fa-align-left"></i></div>
+                    <div class="btn-text">Pertemuan 2: Pemformatan Paragraf, Tata Letak Halaman</div>
+                    <div class="btn-decor-right"><i class="fa-solid fa-ruler-horizontal"></i><i class="fa-regular fa-file-lines"></i></div>
+                </a>
 
-            <a href="https://riski902-alt.github.io/DASHBOARD-MATERI/index.html?id=kelas7-sem2-bab4-pertemuan3" class="course-btn bg-doc-3" style="--i: 3;">
-                <div class="btn-icon-left"><i class="fa-regular fa-image"></i></div>
-                <div class="btn-text">Pertemuan 3: Sisipan Objek dan Pengaturan Layout Gambar dalam Dokumen</div>
-                <div class="btn-decor-right"><i class="fa-solid fa-crop-simple"></i><i class="fa-solid fa-file"></i></div>
-            </a>
+                <a href="https://riski902-alt.github.io/DASHBOARD-MATERI/index.html?id=kelas7-sem2-bab4-pertemuan3" class="course-btn" style="--i: 3;">
+                    <div class="btn-icon-left"><i class="fa-regular fa-image"></i></div>
+                    <div class="btn-text">Pertemuan 3: Sisipan Objek dan Pengaturan Layout Gambar dalam Dokumen</div>
+                    <div class="btn-decor-right"><i class="fa-solid fa-crop-simple"></i><i class="fa-solid fa-file"></i></div>
+                </a>
 
-            <a href="https://riski902-alt.github.io/DASHBOARD-MATERI/index.html?id=kelas7-sem2-bab4-pertemuan4" class="course-btn bg-doc-4" style="--i: 4;">
-                <div class="btn-icon-left"><i class="fa-solid fa-list-ol"></i></div>
-                <div class="btn-text">Pertemuan 4: Pembuatan Daftar Isi Otomatis, Mail Merge, dan Referensi</div>
-                <div class="btn-decor-right"><i class="fa-regular fa-envelope"></i><i class="fa-solid fa-link"></i></div>
-            </a>
+                <a href="https://riski902-alt.github.io/DASHBOARD-MATERI/index.html?id=kelas7-sem2-bab4-pertemuan4" class="course-btn" style="--i: 4;">
+                    <div class="btn-icon-left"><i class="fa-solid fa-list-ol"></i></div>
+                    <div class="btn-text">Pertemuan 4: Pembuatan Daftar Isi Otomatis, Mail Merge, dan Referensi</div>
+                    <div class="btn-decor-right"><i class="fa-regular fa-envelope"></i><i class="fa-solid fa-link"></i></div>
+                </a>
 
-            <a href="https://riski902-alt.github.io/DASHBOARD-MATERI/index.html?id=kelas7-sem2-bab4-pertemuan5" class="course-btn bg-doc-5" style="--i: 5;">
-                <div class="btn-icon-left"><i class="fa-solid fa-file-signature"></i></div>
-                <div class="btn-text">Pertemuan 5: Praktik Mandiri Pembuatan Dokumen Laporan / Proposal Terstruktur dan Rapi</div>
-                <div class="btn-decor-right"><i class="fa-solid fa-pencil"></i><i class="fa-solid fa-check"></i></div>
-            </a>
+                <a href="https://riski902-alt.github.io/DASHBOARD-MATERI/index.html?id=kelas7-sem2-bab4-pertemuan5" class="course-btn" style="--i: 5;">
+                    <div class="btn-icon-left"><i class="fa-solid fa-file-signature"></i></div>
+                    <div class="btn-text">Pertemuan 5: Praktik Mandiri Pembuatan Dokumen Laporan / Proposal Terstruktur dan Rapi</div>
+                    <div class="btn-decor-right"><i class="fa-solid fa-pencil"></i><i class="fa-solid fa-check"></i></div>
+                </a>
 
-            <!-- SPREADSHEET -->
-            <a href="https://riski902-alt.github.io/DASHBOARD-MATERI/index.html?id=kelas7-sem2-bab4-pertemuan6" class="course-btn bg-sheet-1" style="--i: 6;">
-                <div class="btn-icon-left"><i class="fa-solid fa-table-cells"></i></div>
-                <div class="btn-text">Pertemuan 6: Pengenalan Lembar Kerja Pengolah Data</div>
-                <div class="btn-decor-right"><i class="fa-solid fa-table-columns"></i><i class="fa-solid fa-border-all"></i></div>
-            </a>
+                <!-- SPREADSHEET -->
+                <a href="https://riski902-alt.github.io/DASHBOARD-MATERI/index.html?id=kelas7-sem2-bab4-pertemuan6" class="course-btn" style="--i: 6;">
+                    <div class="btn-icon-left"><i class="fa-solid fa-table-cells"></i></div>
+                    <div class="btn-text">Pertemuan 6: Pengenalan Lembar Kerja Pengolah Data</div>
+                    <div class="btn-decor-right"><i class="fa-solid fa-table-columns"></i><i class="fa-solid fa-border-all"></i></div>
+                </a>
 
-            <a href="https://riski902-alt.github.io/DASHBOARD-MATERI/index.html?id=kelas7-sem2-bab4-pertemuan7" class="course-btn bg-sheet-2" style="--i: 7;">
-                <div class="btn-icon-left"><i class="fa-solid fa-calculator"></i></div>
-                <div class="btn-text">Pertemuan 7: Penggunaan Formula Dasar dan Fungsi Aritmatika</div>
-                <div class="btn-decor-right"><i class="fa-solid fa-plus"></i><i class="fa-solid fa-equals"></i></div>
-            </a>
+                <a href="https://riski902-alt.github.io/DASHBOARD-MATERI/index.html?id=kelas7-sem2-bab4-pertemuan7" class="course-btn" style="--i: 7;">
+                    <div class="btn-icon-left"><i class="fa-solid fa-calculator"></i></div>
+                    <div class="btn-text">Pertemuan 7: Penggunaan Formula Dasar dan Fungsi Aritmatika</div>
+                    <div class="btn-decor-right"><i class="fa-solid fa-plus"></i><i class="fa-solid fa-equals"></i></div>
+                </a>
 
-            <a href="https://riski902-alt.github.io/DASHBOARD-MATERI/index.html?id=kelas7-sem2-bab4-pertemuan8" class="course-btn bg-sheet-3" style="--i: 8;">
-                <div class="btn-icon-left"><i class="fa-solid fa-code-branch"></i></div>
-                <div class="btn-text">Pertemuan 8: Penerapan Fungsi Logika (IF) dan Pemformatan Bersyarat (Conditional Formatting)</div>
-                <div class="btn-decor-right"><i class="fa-solid fa-check"></i><i class="fa-solid fa-table"></i></div>
-            </a>
+                <a href="https://riski902-alt.github.io/DASHBOARD-MATERI/index.html?id=kelas7-sem2-bab4-pertemuan8" class="course-btn" style="--i: 8;">
+                    <div class="btn-icon-left"><i class="fa-solid fa-code-branch"></i></div>
+                    <div class="btn-text">Pertemuan 8: Penerapan Fungsi Logika (IF) dan Pemformatan Bersyarat (Conditional Formatting)</div>
+                    <div class="btn-decor-right"><i class="fa-solid fa-check"></i><i class="fa-solid fa-table"></i></div>
+                </a>
 
-            <a href="https://riski902-alt.github.io/DASHBOARD-MATERI/index.html?id=kelas7-sem2-bab4-pertemuan9" class="course-btn bg-sheet-4" style="--i: 9;">
-                <div class="btn-icon-left"><i class="fa-solid fa-magnifying-glass"></i></div>
-                <div class="btn-text">Pertemuan 9: Fungsi Pencarian & Rujukan (VLOOKUP / HLOOKUP) serta Pengolahan Data (Sort & Filter)</div>
-                <div class="btn-decor-right"><i class="fa-solid fa-filter"></i><i class="fa-solid fa-arrow-down-a-z"></i></div>
-            </a>
+                <a href="https://riski902-alt.github.io/DASHBOARD-MATERI/index.html?id=kelas7-sem2-bab4-pertemuan9" class="course-btn" style="--i: 9;">
+                    <div class="btn-icon-left"><i class="fa-solid fa-magnifying-glass"></i></div>
+                    <div class="btn-text">Pertemuan 9: Fungsi Pencarian & Rujukan (VLOOKUP / HLOOKUP) serta Pengolahan Data (Sort & Filter)</div>
+                    <div class="btn-decor-right"><i class="fa-solid fa-filter"></i><i class="fa-solid fa-arrow-down-a-z"></i></div>
+                </a>
 
-            <a href="https://riski902-alt.github.io/DASHBOARD-MATERI/index.html?id=kelas7-sem2-bab4-pertemuan10" class="course-btn bg-sheet-5" style="--i: 10;">
-                <div class="btn-icon-left"><i class="fa-solid fa-chart-column"></i></div>
-                <div class="btn-text">Pertemuan 10: Visualisasi Data Lembar Kerja: Pembuatan dan Pemformatan Grafik / Chart</div>
-                <div class="btn-decor-right"><i class="fa-solid fa-chart-pie"></i><i class="fa-solid fa-chart-line"></i></div>
-            </a>
+                <a href="https://riski902-alt.github.io/DASHBOARD-MATERI/index.html?id=kelas7-sem2-bab4-pertemuan10" class="course-btn" style="--i: 10;">
+                    <div class="btn-icon-left"><i class="fa-solid fa-chart-column"></i></div>
+                    <div class="btn-text">Pertemuan 10: Visualisasi Data Lembar Kerja: Pembuatan dan Pemformatan Grafik / Chart</div>
+                    <div class="btn-decor-right"><i class="fa-solid fa-chart-pie"></i><i class="fa-solid fa-chart-line"></i></div>
+                </a>
 
-            <!-- PRESENTASI -->
-            <a href="https://riski902-alt.github.io/DASHBOARD-MATERI/index.html?id=kelas7-sem2-bab4-pertemuan11" class="course-btn bg-pres-1" style="--i: 11;">
-                <div class="btn-icon-left"><i class="fa-solid fa-person-chalkboard"></i></div>
-                <div class="btn-text">Pertemuan 11: Pengenalan Aplikasi Presentasi, Struktur Slide, dan Prinsip Desain Visual Efektif</div>
-                <div class="btn-decor-right"><i class="fa-solid fa-desktop"></i><i class="fa-solid fa-grip"></i></div>
-            </a>
+                <!-- PRESENTASI -->
+                <a href="https://riski902-alt.github.io/DASHBOARD-MATERI/index.html?id=kelas7-sem2-bab4-pertemuan11" class="course-btn" style="--i: 11;">
+                    <div class="btn-icon-left"><i class="fa-solid fa-person-chalkboard"></i></div>
+                    <div class="btn-text">Pertemuan 11: Pengenalan Aplikasi Presentasi, Struktur Slide, dan Prinsip Desain Visual Efektif</div>
+                    <div class="btn-decor-right"><i class="fa-solid fa-desktop"></i><i class="fa-solid fa-grip"></i></div>
+                </a>
 
-            <a href="https://riski902-alt.github.io/DASHBOARD-MATERI/index.html?id=kelas7-sem2-bab4-pertemuan12" class="course-btn bg-pres-2" style="--i: 12;">
-                <div class="btn-icon-left"><i class="fa-solid fa-photo-film"></i></div>
-                <div class="btn-text">Pertemuan 12: Penggunaan Objek, Media (Gambar & Video), serta Efek Transisi dan Animasi</div>
-                <div class="btn-decor-right"><i class="fa-solid fa-play"></i><i class="fa-solid fa-wand-magic-sparkles"></i></div>
-            </a>
+                <a href="https://riski902-alt.github.io/DASHBOARD-MATERI/index.html?id=kelas7-sem2-bab4-pertemuan12" class="course-btn" style="--i: 12;">
+                    <div class="btn-icon-left"><i class="fa-solid fa-photo-film"></i></div>
+                    <div class="btn-text">Pertemuan 12: Penggunaan Objek, Media (Gambar & Video), serta Efek Transisi dan Animasi</div>
+                    <div class="btn-decor-right"><i class="fa-solid fa-play"></i><i class="fa-solid fa-wand-magic-sparkles"></i></div>
+                </a>
 
-            <a href="https://riski902-alt.github.io/DASHBOARD-MATERI/index.html?id=kelas7-sem2-bab4-pertemuan13" class="course-btn bg-pres-3" style="--i: 13;">
-                <div class="btn-icon-left"><i class="fa-solid fa-microphone-lines"></i></div>
-                <div class="btn-text">Pertemuan 13: Teknik Penyampaian Presentasi: Fitur Slide Master, Presenter View, dan Etika Presentasi</div>
-                <div class="btn-decor-right"><i class="fa-solid fa-users"></i><i class="fa-solid fa-desktop"></i></div>
-            </a>
+                <a href="https://riski902-alt.github.io/DASHBOARD-MATERI/index.html?id=kelas7-sem2-bab4-pertemuan13" class="course-btn" style="--i: 13;">
+                    <div class="btn-icon-left"><i class="fa-solid fa-microphone-lines"></i></div>
+                    <div class="btn-text">Pertemuan 13: Teknik Penyampaian Presentasi: Fitur Slide Master, Presenter View, dan Etika Presentasi</div>
+                    <div class="btn-decor-right"><i class="fa-solid fa-users"></i><i class="fa-solid fa-desktop"></i></div>
+                </a>
 
-            <!-- INTEGRASI -->
-            <a href="https://riski902-alt.github.io/DASHBOARD-MATERI/index.html?id=kelas7-sem2-bab4-pertemuan14" class="course-btn bg-int-1" style="--i: 14;">
-                <div class="btn-icon-left"><i class="fa-solid fa-diagram-project"></i></div>
-                <div class="btn-text">Pertemuan 14: Integrasi Konten Antar-Aplikasi Perkantoran</div>
-                <div class="btn-decor-right"><i class="fa-solid fa-file-excel"></i><i class="fa-solid fa-file-powerpoint"></i></div>
-            </a>
+                <!-- INTEGRASI -->
+                <a href="https://riski902-alt.github.io/DASHBOARD-MATERI/index.html?id=kelas7-sem2-bab4-pertemuan14" class="course-btn" style="--i: 14;">
+                    <div class="btn-icon-left"><i class="fa-solid fa-diagram-project"></i></div>
+                    <div class="btn-text">Pertemuan 14: Integrasi Konten Antar-Aplikasi Perkantoran</div>
+                    <div class="btn-decor-right"><i class="fa-solid fa-file-excel"></i><i class="fa-solid fa-file-powerpoint"></i></div>
+                </a>
 
-            <a href="https://riski902-alt.github.io/DASHBOARD-MATERI/index.html?id=kelas7-sem2-bab4-pertemuan15" class="course-btn bg-int-2" style="--i: 15;">
-                <div class="btn-icon-left"><i class="fa-solid fa-folder-tree"></i></div>
-                <div class="btn-text">Pertemuan 15: Proyek Integrasi Aplikasi Perkantoran (Dokumen, Data, dan Slide)</div>
-                <div class="btn-decor-right"><i class="fa-solid fa-check-double"></i><i class="fa-solid fa-list-check"></i></div>
-            </a>
+                <a href="https://riski902-alt.github.io/DASHBOARD-MATERI/index.html?id=kelas7-sem2-bab4-pertemuan15" class="course-btn" style="--i: 15;">
+                    <div class="btn-icon-left"><i class="fa-solid fa-folder-tree"></i></div>
+                    <div class="btn-text">Pertemuan 15: Proyek Integrasi Aplikasi Perkantoran (Dokumen, Data, dan Slide)</div>
+                    <div class="btn-decor-right"><i class="fa-solid fa-check-double"></i><i class="fa-solid fa-list-check"></i></div>
+                </a>
 
-            <!-- GAMES -->
-            <a href="games.html" class="course-btn bg-games" style="--i: 16;">
-                <div class="btn-icon-left"><i class="fa-solid fa-gamepad"></i></div>
-                <div class="btn-text">GAMES</div>
-                <div class="btn-decor-right"><i class="fa-solid fa-star"></i><i class="fa-solid fa-dice-d6"></i></div>
-            </a>
+                <!-- GAMES -->
+                <a href="games.html" class="course-btn" style="--i: 16;">
+                    <div class="btn-icon-left"><i class="fa-solid fa-gamepad"></i></div>
+                    <div class="btn-text">GAMES</div>
+                    <div class="btn-decor-right"><i class="fa-solid fa-star"></i><i class="fa-solid fa-dice-d6"></i></div>
+                </a>
 
-            <!-- SUMATIF -->
-            <a href="sumatif.html" class="course-btn bg-sumatif" style="--i: 17;">
-                <div class="btn-icon-left"><i class="fa-solid fa-clipboard-check"></i></div>
-                <div class="btn-text">SUMATIF BAB IV</div>
-                <div class="btn-decor-right"><i class="fa-solid fa-trophy"></i><i class="fa-solid fa-pencil"></i></div>
-            </a>
+                <!-- SUMATIF -->
+                <a href="sumatif.html" class="course-btn" style="--i: 17;">
+                    <div class="btn-icon-left"><i class="fa-solid fa-clipboard-check"></i></div>
+                    <div class="btn-text">SUMATIF BAB IV</div>
+                    <div class="btn-decor-right"><i class="fa-solid fa-trophy"></i><i class="fa-solid fa-pencil"></i></div>
+                </a>
 
-        </main>
+            </main>
+        </div>
+
+        <!-- Footer Halaman -->
+        <footer class="page-footer">
+            <p>INFORMATIKA FUN @ By: Riski Amalia, S.Pd</p>
+        </footer>
+
     </div>
 
 </body>
